@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test8</title>
+	<script type="text/javascript">
+		// 중첩 반복문 (중첩 for문)
+		// 시침이 1증가 하기 위해서는, 분침이 처음부터 끝까지 빈복
+		/*
+ 		for(초기식;조건식;증감식){ // 시침
+			for(초기식;조건식;증감식){ //분침
+				반복할 코드;
+			}
+		} */
+		
+/*		for (var i = 1; i <= 5; i++) {
+				document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+i+"시 <br>");
+			for (var j = 1; j <= 5; j++) {
+				document.write("i = "+i+" j = "+j+"<br>");
+			}
+				document.write("<hr>");
+		}
+*/
+		// 구구단 2~9단 출력
+		// [2단]
+		// [3단]
+		// [4단]
+		// ....
+		// [9단]
+		
+/* 		for(var i = 2;i<=9;i++){
+			document.write("&nbsp;&nbsp;&nbsp;"+i+"단<br>")
+			for (var j = 1; j <= 9; j++) {
+				document.write(i+" * "+j+" = "+i*j+"<br>");
+			}
+			document.write("<hr>");
+		}
+*/
+		
+		var table = "";
+		
+		table += "<table>";
+		table += "<tr>";
+		for(var i = 2; i<=9; i++){
+			table += ("<th>"+i+" 단</th>");
+		}
+		table += "</tr>";
+		
+		for(var i = 1;i<=9;i++){
+			table += "<tr>";
+			for (var j = 2; j <= 9; j++) {
+				table += ("<td>"+j+" * "+i+" = "+j*i+"</td>");
+			}
+			table += "</tr>";
+		}
+		
+		table += "</table>";
+		
+		document.write(table);
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+</head>
+<body>
+	<h1>WebContent/js1/test8.html</h1>
+</body>
+</html>

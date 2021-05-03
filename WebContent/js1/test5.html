@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test5</title>
+	<script type="text/javascript">
+		//제어문 - 조건문 - if/else/if else
+		//	   - 선택문 - switch-case문
+		//	   - 반복문 - while/for문
+		
+		// if문 : 조건식의 값이 참(true)일때 실행하는 코드
+		
+ 		//if(조건식){
+		//	실행문;
+		//} 
+		
+		var number = -100;
+		
+		document.write(number>0? "양수입니다." : "음수입니다.");
+		if (number > 0) {
+			document.write("<br>"+"양수입니다.");
+		}
+		
+		if (number < 0) {
+			document.write("<br>"+"음수입니다.");
+		}
+		//////////////////////////////////////////////////////////////////
+		// number 변수의 데이터를 절대값 계산후 출력
+		
+		if (number < 0) {
+			number = -number;
+		}
+		
+		document.write("<br>절대값 : "+number+"<br>");
+		
+		// Boolean(값)과 같은방식으로 처리됨
+		// 0,null,undefined,"" 입력시 -> false, 그외 모든 데이터 true
+		if (9) {
+			document.write("실행 <br>");
+		}
+		
+		
+		// 나이가 20살 이상 -> "성인입니다."
+		// 나이가 20살 미만 -> "미성년자 입니다."
+		
+		var age = 10;
+		
+		if (age >= 20) {
+			document.write("성인입니다.");
+		}
+		
+		if(age < 20){
+			document.write("미성년자입니다.");
+		}
+		
+		// prompt() 사용하여 사용자의 이름을 입력받는다.
+		// " OOO님 환영합니다." (입력시)
+		// "이름 미입력" -> 출력X
+//		var name = prompt("이름을 적어주세요");
+// 		if(name !== "" ){
+			
+//			alert(name+"님 환영합니다")
+//			document.write(name+"님 환영합니다! <br>")
+			
+//		} 
+//		if(name){
+			
+//			alert(name+"님 환영합니다")
+//			document.write(name+"님 환영합니다! <br>")
+			
+//		}
+		
+		// else문 : if문의 조건이 참이 아닌 경우 실행하겠다.
+		
+//		if (조건문) {
+//			실행문
+//		}else{
+			
+//		}
+		
+		//홀, 짝
+		number = 54;
+		
+		//입력받은 변수의 값이 홀수, 짝수 인지를 판별 후 출력
+		// number%2 != 0
+		// number%2 == 1
+		if (number%2 == 0) {
+			document.write(number+"는 짝수 입니다.<br>");
+		}else {
+			document.write(number+"는 홀수 입니다.<br>");
+		}
+		
+		// confirm => 질문 + 확인(true, 취소(false)버튼)
+		//var dtnValue = confirm("질문작성");
+		//alert(dtnValue);
+		
+		//"회원 탈퇴 하시겠습니가?" ->확인 취소
+		// 확인 -> "정상적으로 탈퇴했습니다." 
+		// 취소 -> "회원 탈퇴취소!"
+		
+/* 		var join =  confirm("회원 탈퇴 하시겠습니까.");
+		if (join == true) {
+			document.write("정상적으로 탈퇴했습니다. <br>");
+		}else{
+			document.write("회원 탈퇴취소! <br>" );
+		} */
+		
+		// * if/else문은 실행하는 코드가 1줄일 경우 {} 생략 가능 하지만 쓰지않는거 추천
+		
+//		if (join == true) 
+//			document.write("정상적으로 탈퇴했습니다. <br>");
+//		else
+//			document.write("회원 탈퇴취소! <br>" );
+		
+		////////////////////////////////////////////////////////////////////////
+		
+		//여러개의 조건을 비교 else if
+//		if(조건문1){
+//			실행문;
+//		}else if(조건문2){
+//			실행문;
+//		}else if(조건문3){
+//			실행문;
+//		}else{
+//			실행문;
+//		}
+		
+		//if문 4개랑 위의 else if가 들어간 구문은 같지 않다.
+		//if문만 있는 구문은 전체 데이타 중에서 if데이터만적용이되고
+		//else if는 if를뺸 나머지들 중에서 정하는것이다. if문보다 검색하는 구간이 적다
+		//즉 모든 상황에 대처 할수가있다.
+		
+		//사용자 현재 월을 입력받기
+		// 3~5월 "봄"
+		// 6~8월 "여름"
+		// 9~11월 "가을"
+		// 12~2월 "겨울"
+		
+/* 		var seaseo = prompt("현재 월은 몇월인가요?");
+		if(seaseo >= 3 && seaseo <=5){
+			document.write(seaseo+"월은 봄입니다. <br>");
+		}else if (seaseo >= 6 && seaseo <=8) {
+			document.write(seaseo+"월은 여름입니다. <br>");
+		}else if (seaseo >= 9 && seaseo <=11) {
+			document.write(seaseo+"월은 가을입니다. <br>");
+		}else if (12 == seaseo || (1 <= seaseo && seaseo <= 2) ) {
+			document.write(seaseo+"월은 겨울입니다. <br>");
+		}else {
+			document.write("정확한 데이터를 입력하세요~!");
+		} */
+		
+//		else {
+//			document.write(seaseo+"월은 겨울입니다. <br>");
+//		}
+		
+		
+		// 숫자 입력 -> 입력된 숫자의 정보를 출력 (정수 인지를 판별)
+		// 								양수,음수,0
+		
+		// if-else if
+		
+		// 삼항연산자
+		
+		
+/* 		var num = prompt("숫자를 입력하세요.");
+		
+		if (num == 0) {
+			document.write(num+"입니다.");
+		}else if (num != 0) {
+			document.write(num > 0? "양수 입니다." : "음수 입니다.");
+		}
+		
+		document.write((num>0)? "양수 ": (num <0? "음수" : "0")); */
+		
+/* 		if(num > 0){
+			document.write("양수");
+		}else if (num < 0) {
+			document.write("음수");
+		}else{
+			document.write("0");
+		} */
+		
+		// 학점 계산 프로그램
+		// 학생 성적에 따른 학점을 출력
+		// 100~90 : A
+		// 89~80 : B
+		// 79~70 : C
+		// 69~60 : D
+		// 59~0 : F
+		
+		var score = 91;
+		
+		if (90 <= score && score <= 100 ) {
+			document.write("당신의 학점은 A 입니다.");
+		}else if (80 <= score && score <= 89 ) {
+			document.write("당신의 학점은 B 입니다.");
+		}else if (70 <= score && score <= 79) {
+			document.write("당신의 학점은 C 입니다.");
+		}else if (60 <= score && score <= 69) {
+			document.write("당신의 학점은 D 입니다.");
+		}else if (0 <= score && score <= 59) {
+			document.write("당신의 학점은 F 입니다.");
+		}else{
+			document.write("0~100 사이의 점수를 적어주세요");
+		}
+		
+		// 선택문 - switch-case문
+		// 코드의 종료
+		// 1) 처음부터 끝까지 실행
+		// 2) default구문을 실행한 경우
+		// 3) 특정 케이스에서 실행후 break문을 만난경우
+		//  => 특정 케이스 선택후 break문이 없는경우? 다음에 나오는 모든 코드를
+		//		break문을 찾을 때 까지 모두 실행
+		
+/* 		switch (변수) {
+		case 값:
+			실행문;
+			break;  
+		case 값:
+			실행문;
+			break;
+			
+		default:
+			실행문;
+		} */
+		
+		
+		var num = 10;
+		
+		switch (num) {
+		
+		case 10:
+			alert("10!");
+			break; //해당 case가 적용된후 switch-case를 탈출 
+		case 9:
+			alert("9!");
+			break;
+		case 8:
+			alert("8!");
+			break;
+		case 7:
+			alert("7!");
+			break;
+		default:
+			alert(num);
+			
+		}
+		
+		var data = "아이티윌";
+		
+		switch (data) {
+		case "아이티윌":
+			alert("체크(아이티윌)");
+			break;
+		case "부산":
+			alert("체크!(부산)");
+			break;
+		default:
+			break;
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		// 학점 계산 프로그램  -> switch - case문 사용
+		// 학생 성적에 따른 학점을 출력
+		// 100~90 : A
+		// 89~80 : B
+		// 79~70 : C
+		// 69~60 : D
+		// 59~0 : F
+		
+		var sco = 80;
+		
+		switch (Math.floor(sco/10)) {
+		case 10:
+		case 9:
+			alert("A");
+			break;
+		case 8:
+			alert("B");
+			break;
+		case 7:
+			alert("C");
+			break;
+		case 6:
+			alert("D");
+			break;
+		case 5:
+		case 4:
+		case 3:
+		case 2:
+		case 1:
+			alert("F");
+			break;
+		default:
+			alert("0~100사이로 적어주세요");
+			break;
+		}
+		
+		//샘 설명
+		var score2 = 97;
+		var grade = "F"; //변수로 만들어 실행하는게 속도가 약간 더 빠름
+		
+		var tmp = Math.floor(score2/10);//연산자는 되도록 위쪽으로 빼서 계산하자
+		
+		switch (tmp) {
+		case 10:
+//			alert("A");
+//			break;
+		case 9:
+//			alert("A");
+			grade = " A ";
+			break;
+		case 8:
+//			alert("B");
+			grade = " B ";
+			break;
+		case 7:
+//			alert("C");
+			grade = " C ";
+			break;
+		case 6:
+//			alert("D");
+			grade = " D ";
+			break;
+		default:
+//			alert("F");
+			grade = " F ";
+		}// switch 끝
+		
+		alert("등급 : "+grade);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+	
+	
+	
+</head>
+<body>
+	<h1>WebContent/js1/test5.html</h1>
+</body>
+</html>
