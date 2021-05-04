@@ -2,20 +2,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>구구단 가로</title>
 	<script type="text/javascript"> 
 
-		for (var i = 2; i <= 9 ; i++) {
-			document.write(" &nbsp;&nbsp;&nbsp;&nbsp;"+i+"단");
-		}
-		document.write("<br>");
+//		for (var i = 2; i <= 9 ; i++) { 
+//			document.write(" &nbsp;&nbsp;&nbsp;&nbsp;"+i+"단");
+//		}
+//		document.write("<br>");
 		
-		for (var i = 1; i <= 9; i++) {
+		for (var i = 0; i <= 9; i++) {//1~9
 			document.write("<br>");
-			for (var j = 2; j <= 9; j++) {
-				document.write();
+			for (var j = 2; j <= 9; j++) {//2~9
+				if (i==0) {
+					document.write("[ "+j+"단 ]");
+				}else{//1~9
+					document.write(j+"X"+i+"="+j*i+" ");
+				}
 			}
-			
+			document.write("<br>");
 		}
 		
 		
