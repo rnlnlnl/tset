@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test2</title>
+	<script type="text/javascript">
+		// 내장객체 - 날짜 객체(Date)
+		
+		// 날짜 정보를 저장하고있는 객체를 생성
+		// 객체의 개수는 new를 세어보면 된다
+		// new Date(); // 쓰레기값 => 가비지 생성(X)  사용하고는 싶은데 어디있는지 알수가없어서 가져오지못해 쓰레기라고 부른다
+		//						  가비지 콜랙터(g.c)가 메모리를 돌면서 쓰레기를 수집해서 없애준다
+		var d = new Date(); // 현 시스템의 날짜, 시잔정보를 저장하는 객체
+		//alert("날짜정보 : "+d);
+		var d1 = new Date(2021,5,6); // 특정 날짜 정보 저장객체(년,월-1,일) 월 같은 경우는 적은 월에서 -1이 되어 나타난다
+										// 컴퓨터 상에서 월은 0~11 까지 있기 때문이다
+		//alert(d1);
+		var d2 = new Date("2021/5/6"); // ""안에 작성한후 /로 표기하면 현재 월이 나타낸다
+		//alert(d2);
+		var d3 = new Date(2021,5,6,9,30,0); // (년,월,일,시,분,초)
+		//alert(d3);
+		
+		// 오늘은 ㅇㅇ년 ㅇㅇ월 ㅇㅇ일 ㅇㅇ요일
+		
+		document.write("오늘은 "+d.getFullYear()+"년 ");
+		document.write(1+d.getMonth()+"월"); // d.getMonth()(0월~11월)
+		document.write(d.getDate()+"일");
+//		document.write(d.getDay()+"요일")
+		
+		var myDay="";
+		
+		switch (d.getDay()) {
+		case 0:
+			myDay="일";
+			break;
+		case 1:
+			myDay="월";
+			break;
+		case 2:
+			myDay="화";
+			break;
+		case 3:
+			myDay="수";
+			break;
+		case 4:
+			myDay="목";
+			break;
+		case 5:
+			myDay="금";
+			break;
+		case 6:
+			myDay="토";
+			break;
+		default:
+			break;
+		}
+		
+		//=> 요일을 출력하는 동작을 메서드로 구현후 실행
+		function day(num) {
+			// 해당 요일정보를 바탕으로 요일을 출력(x), 요일을 리턴(ㅇ)
+			var dat = "";
+			switch (num) {
+			case 0:
+				dat = "일";
+				break;
+			case 1:
+				dat = "월";
+				break;
+			case 2:
+				dat = "화";
+				break;
+			case 3:
+				dat = "수";
+				break;
+			case 4:
+				dat = "목";
+				break;
+			case 5:
+				dat = "금";
+				break;
+			case 6:
+				dat = "토";
+				break;
+			default:
+				break;
+			}
+			
+			//결과리턴
+			return dat;
+		}
+		
+		
+		
+		// document.write(d.getDay()+"요일"); //d.getDay()(0일~6일)
+		document.write(myDay+"요일"); // d.getDay()(0일~6토)
+		document.write(day(d.getDay())+"요일");
+		
+		
+		//whatTime() => "2021/5/6 5시 37분00초" 출력하는 함수를 생성
+		function tim(num) {
+			
+			document.write("2021/5/6");
+			
+			return num;
+		}
+		
+		
+		
+		
+	</script>
+</head>
+<body>
+	<h1>WebContent/js2/test2.html</h1>
+</body>
+</html>

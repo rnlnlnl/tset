@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test11</title>
+	<script type="text/javascript">
+		
+		// 정수 2개를 입력 받아서 두개의 합을 출력하는 함수 ->출력
+		
+		
+		function num(num1, num2) {
+			document.write("합 : "+(num1+num2));	
+		}
+		num(10,20);
+		
+		//정수 1개를 입력받아서 해당 정수의 절대값을 리턴하는 함수
+		
+		function sum(num1) {
+/* 			if (num1 < 0) {
+				num1 = -num1;
+			}
+			return num1; */
+			return num1<0? (-num1) : (num1);    // return에 3항 연산자를!!!!
+		}
+		document.write("<br>"+sum(5));
+		document.write("<br>"+sum(-5)+"<br>");
+		
+		
+		// 1) 함수 tot() 양의 정수 1개를 입력받아서
+		// 1~전달받은 정수 까지의 합을 출력
+		
+		function tot(num1) {
+			var hab = 0;
+			for(var i = 1; i<=num1; i++){
+				hab += i;
+			}
+//			return hab;
+			document.write("1~"+num1+" 까지 합 :"+hab+"<br>");
+		}
+		
+//		document.write(tot(10)+"<br>");
+		tot(10);
+		
+		// 2) 함수 myCal() 숫자 2개, 기호 1개를 받아서(+ - * / %)
+		// 각 입력값에 대한 결과를 출력
+		//myCal(10,"+",20) => "결과 : 30"
+		function myCal(num1,ca,num2) {
+			var result =0;
+			
+			switch (ca) {
+			case "+":
+				result = num1 + num2;
+				break;
+			case "-" :
+				result = num1 - num2;
+				break;
+			case "*":
+				result = num1 * num2;
+				break;
+			case "/":
+				result = num1 / num2;
+				break;
+			case "%":
+				result = num1 % num2;
+				break;
+			default:
+				result="연산 불가";
+			}// swich
+			
+			document.write("결과 : "+result+"<br>");
+		}// function
+		myCal(10,"/",20);
+		myCal(10,"+",20);
+		myCal(10,"*",20);
+		
+
+		
+	</script>
+</head>
+<body>
+	<h1>WebContent/js1/test11.html</h1>
+</body>
+</html>
