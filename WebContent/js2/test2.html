@@ -95,14 +95,37 @@
 		document.write(myDay+"요일"); // d.getDay()(0일~6토)
 		document.write(day(d.getDay())+"요일");
 		
-		
+		document.write("<hr>");
 		//whatTime() => "2021/5/6 5시 37분00초" 출력하는 함수를 생성
-		function tim(num) {
-			
-			document.write("2021/5/6");
-			
-			return num;
-		}
+		
+		var toDay = new Date();
+		
+		document.write(toDay.getFullYear()+"/ ");
+		document.write(toDay.getMonth()+1+"/ "); 
+		document.write(toDay.getDate()+" ");
+		document.write(toDay.getHours()+"시 ");
+		document.write(toDay.getMinutes()+"분 ");
+		document.write(toDay.getSeconds()+"초");
+		
+		
+		// Day 계산기
+		// 특정일 - 오늘(현재) 
+		var Daay = new Date("2021/12/31");
+		var today = new Date();
+		
+//		document.write(Daay);
+//		document.write(toDay);
+		var result = (Daay - today);
+//		alert(typeof result); => 날짜를 밀리 세컨드로 표현한것 1000/1초
+		
+		// 1초 1000msc
+		// 1분 1000msc * 60
+		// 1시간 1000msc * 60 * 60
+		// 1일 1000msc * 60 * 60 * 24
+		
+		// => Daay 계산하기
+		
+		alert("남은일수 : "+Math.ceil(result/(1000*60*60*24))+"일");
 		
 		
 		

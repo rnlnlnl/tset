@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test7</title>
+<script type="text/javascript">
+	//window-document rorcp
+	// -> window.document.XXXXX
+	// 속성 : title, location, bgColor(배경색), fgColor(글자색),....
+	// 동작 : write(),....
+	
+	function fun1() {
+		alert("document 속성");
+		//alert(window.document);
+		console.log(window.document);
+		alert("title : "+document.title);
+		alert("location : "+document.location);	
+	}//fun1
+	
+	// -> "속성변경" 버튼 클릭시 배경색을  aqua변경
+	function fun2() {
+		window.document.bgColor="aqua";
+	}//fun22
+	
+	var col = ["red","green","aqua","orange","#112233","blue","yellow"];
+	
+	function fun3() {
+		// 배경색, 글자색 둘다 랜덤 변경
+		// 랜덤값(0~6)
+		var ran = Math.floor(Math.random()*7);
+		var ram = Math.floor(Math.random()*7);
+		
+		// 배경색 변경
+		window.document.fgColor=col[ran];
+		// 글자색 변경
+		window.document.bgColor=col[ram];
+	}//fun3()
+	
+	// 라디오 버튼으로 배경색 바꾸기
+	function fun4(c) {
+		
+		document.bgColor=c;
+		
+	}
+	
+	// 시험은 과제 형태로 제출
+	
+	
+</script>
+</head>
+<body>
+	<h2>WebContent/js2/test7.html</h2>
+	
+	<input type="button" value="속성확인" onclick="fun1();">
+	
+	<input type="button" value="속성변경" onclick="fun2();">
+	
+	<input type="button" value="속성변경(random)" onclick="fun3();">
+	
+	<hr>
+	<!-- fun4() 사용 라디오는 name이라는 속성으로 값을 같게 주면 하나가된다-->
+	<input type="radio" name="col" onclick="fun4('pink')"> PINK
+	<input type="radio" name="col" onclick="fun4('orange')"> ORANGE
+	<input type="radio" name="col" onclick="fun4('aqua')"> AQUA
+	
+	
+	
+	
+	
+</body>
+</html>
