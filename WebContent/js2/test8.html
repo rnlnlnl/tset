@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test8</title>
+<script type="text/javascript">
+	// window - location 객체 : 브라우저의 주소창에 대한 정보를 저장하는 객체
+	// => (window).location.속성 /(window).location.동작()
+	// .href   .protocal   .hostname    .host   .port   .search
+	
+	// location 객체의 속성을 확인
+	function fun1() {
+		alert("href : "+window.location.href); // http://localhost:8088/StudyJSP/js2/test8.html
+		alert("protocal : "+location.protocol ); // http:
+		alert("hostname : "+location.hostname); //localhost : 전화번호
+		alert("host : "+location.host); //localhost:8088 : 어떤 프로그램을 써서 연락을 하느냐 
+		alert("port : "+location.port); // 8088 어디인가?
+		alert("search : "+location.search); // ?name=%ED%99%8D%EA%B8%B8%EB%8F%99 뒤쪽에 적힌 데이터
+		
+		
+	}//fun1
+	
+	// location.href 속성을 변경
+	// test1.html 페이지로 이동
+	function fun2() {
+		//페이지 이동
+		//location.href = "test1.html";
+		location.href = "../웹프로그래밍.txt";
+	}
+	
+	//페이지 새로고침
+	//location.reload(); 
+	
+	//페이지 이동
+	location.replace("test1.html");
+	
+	function fun3() {
+		
+	}
+	
+</script>
+</head>
+<body>
+	<h2>WebContent/js2/test8.html</h2>
+	
+	<input type="button" value="location 속성값 확인" onclick="fun1()"> <br>
+	<input type="button" value="location 속성값 변경" onclick="fun2()"> <br>
+	<input type="button" value="location 속성값 변경" onclick="fun3()"> <br>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
