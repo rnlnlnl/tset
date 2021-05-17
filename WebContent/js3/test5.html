@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test5</title>
+	<script type="text/javascript">
+		// window-document-form-select태그(객체)
+		// 속성 - .name  .length  .type   .selectedIndex (위치 값)
+		function fn1() {
+			alert("name : "+document.fr.subject.name);
+			// 옵션의 개수를 계산
+			alert("length :"+document.fr.subject.length);
+			alert("type : "+document.fr.subject.type);
+			alert("selectedIndex : "+ document.fr.subject.selectedIndex);
+			
+			// window-document-form-select태그(객체).options[위치].속성
+			// .text  .value  .selected (true / false)
+			alert("text : "+document.fr.subject.options[0].text);
+			alert("value : "+document.fr.subject.options[0].value);
+			alert("selected : "+document.fr.subject.options[0].selected);
+			
+		}
+		
+		//select 변경시 마다 변경된 해당 option의 text값을 출력(alert)
+		
+		
+		function fun1() {
+			var sum = document.fr.subject.option.length;
+			
+			alert("value : "+document.fr.subject.value);
+		}
+		
+		
+		
+		
+	</script>
+</head>
+<body>
+	<h1>WebContent/js3/test5.html</h1>
+	<!-- get방식은 데이터를 넘겼을 때 한글 깨짐이 일어난다 
+		그래서 value속성으로 값을 전달한다.
+	-->
+	<form action="test.jsp" method="get" name="fr">
+		<!-- size="3" multiple="multiple" -->
+		<select name="subject" onchange="fun1();">
+			<!-- option에 value값이 없을경우 text값이 value값으로 처리된다 -->
+			<option value="">1번선택하세요.</option>
+			<option value="java">JAVA</option>
+			<option value="js">JAVASCRIPT</option>
+			<option value="ora">오라클</option>
+			<option value="jsp">자바스크립트</option>
+		</select>
+		
+		<hr>
+		<input type="submit" value="전달하기">
+		<input type="button" value="select 속성확인" onclick="fn1();">
+		
+		
+	</form>
+	
+	
+	
+	
+</body>
+</html>
