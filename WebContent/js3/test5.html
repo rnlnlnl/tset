@@ -24,11 +24,61 @@
 		//select 변경시 마다 변경된 해당 option의 text값을 출력(alert)
 		
 		
-		function fun1() {
-			var sum = document.fr.subject.option.length;
+ 		function fun1() {
+
+ 			var si = document.fr.subject.selectedIndex;
+ 			
+ 			alert("변경 : "+document.fr.subject.options[si].text);
 			
-			alert("value : "+document.fr.subject.value);
+			
+			
+			
+			
+			
+			/* switch (document.fr.subject.selectedIndex) {
+			case 0:
+				alert(document.fr.subject.options[0].value);
+				break;
+			case 1:
+				alert(document.fr.subject.options[1].value);
+				break;
+			case 2:
+				alert(document.fr.subject.options[2].value);
+				break;
+			case 3:
+				alert(document.fr.subject.options[3].value);
+				break;
+			case 4:
+				alert(document.fr.subject.options[4].value);
+				break;
+			
+
+			default:
+				break;
+			}  */
+			
+
+		} 
+		
+		//선택된 항복이 없을 경우 submit이벤트 처리X
+		function fun2() {
+			//select-selectedIndex -> 사용
+			//select-options[0]-selected ->사용
+			//select-options[0]-value 확인 "" ->사용
+			//if (document.fr.subject.options[0].selected == true) 
+			//if (document.fr.subject.options[0].selected)
+			//if (document.fr.subject.options[0].value == "") 
+			
+			if (document.fr.subject.selectedIndex == 0) {
+				alert("과목을 선택하세요!");
+				document.fr.subject.focus();
+				return false;
+			}
+			
+			
 		}
+		
+		
 		
 		
 		
@@ -40,7 +90,7 @@
 	<!-- get방식은 데이터를 넘겼을 때 한글 깨짐이 일어난다 
 		그래서 value속성으로 값을 전달한다.
 	-->
-	<form action="test.jsp" method="get" name="fr">
+	<form action="test.jsp" method="get" name="fr" onsubmit="return fun2();">
 		<!-- size="3" multiple="multiple" -->
 		<select name="subject" onchange="fun1();">
 			<!-- option에 value값이 없을경우 text값이 value값으로 처리된다 -->
