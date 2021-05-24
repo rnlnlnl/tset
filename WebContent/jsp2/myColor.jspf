@@ -1,0 +1,32 @@
+<%request.setCharacterEncoding("UTF-8"); %>
+<%
+	//jspf는 jsp를 보여주는 별다른 방법이다. (차이없다)
+	String myCol1 ="red";
+	String col2 ="yellow";
+	String col3 ="pink";
+	String col4 ="aqua";
+
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
