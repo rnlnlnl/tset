@@ -45,6 +45,7 @@
 	<h3>2) javascript사용 이동 (파라미터, session, application 정보 사용 O)</h3>
 		
 		<script type="text/javascript">
+			// 동시 사용금지
 			//alert("자바스크립트 사용 페이지 이동");
 			//location.href='scopeProAction.jsp?id=<%=id%>&pw=1234';
 		</script>
@@ -52,11 +53,32 @@
 	<%-- --------------------------------------------------------------------------------------------- --%>
 	<h3>3) jsp사용 이동 (session, application 정보 사용 O)</h3>
 		<%
-			response.sendRedirect("scopeProAction.jsp?id="+id+"&pw=1234");
+			//response.sendRedirect("scopeProAction.jsp?id="+id+"&pw=1234");
 		%>
 	
 	<%-- --------------------------------------------------------------------------------------------- --%>
-	<h3>4) 액션 태그샤용 이동</h3>
+	<h3>4) 액션 태그사용 이동</h3>
+	<!-- 
+		forward 방식 이동(포워딩) : 페이지 이동시 request, response객체 정보를 저장후 이동
+			* 페이지 이동시 주소의 변경 X, 화면의 변경 O
+			주소만 바뀌지 않고 화면만 바뀌는 특이 현상이 일어난다 
+			pro.jsp -> proAction.jsp
+		주소 : pro.jsp
+		화면 : proAction.jsp
+	 -->
+	<jsp:forward page='scopeProAction.jsp'>
+		<jsp:param value="0000" name="pw"/>
+	</jsp:forward>
+	
+	<% 
+		//forward를 자바 언어로 만들기
+		//RequestDispatcher dis = request.getRequestDispatcher("scopeProAction.jsp");
+		//dis.forward(request, response);
+	%>
+	
+	
+	
+	
 	
 	<h5>번외) ajax사용 이동</h5>
 	
