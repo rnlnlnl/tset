@@ -82,6 +82,11 @@
 			System.out.print("아이디 같음");
 			if(userPW.equals(pw)){
 				System.out.println("본인 - 로그인 성공");
+				
+				// 세션영역에 로그인 성공시 일벽한 id값을 저장
+				// -> 세션영역에서 항상 확인 가능
+				session.setAttribute("id", id);
+				
 				//페이지 이동
 				response.sendRedirect("sessionMain.jsp");
 			}else{

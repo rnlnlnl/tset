@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>WebContent/jsp3/sessionMain.jsp</h1>
+	<h2>메인 페이지</h2>
 	<%
 	 // 1. 로그인 페이지에서 사용자의 정보(id,pw)입력
 	 // 2. 로그인 처리 페이지(sessionLoginPro.jsp) 이동
@@ -18,8 +19,28 @@
 	 // 5. 로그인 성공시 페이지 이동(sessionMain.jsp)
 	 // 6. 로그인 성공 여부를 판단
 	%>
-	<%String id1 = (String)session.getAttribute("id1"); %>
-	<h2><%=id1%>님로그인 성공</h2>
+	
+	<%
+		// 세션 영역객체의 값을 사용해서 로그인 체크 여부
+		String id = (String)session.getAttribute("id");
+		
+		if(id == null){
+			// 로그인 X
+			response.sendRedirect("sessionLogin.jsp");
+		}
+		
+		
+	%>
+		<h2><%=id%>님 로그인 환영 합니다.</h2>
+		
+	<hr>	
+	
+	<input type="button" value="로그아웃" onclick="location.href='sessionLogout.jsp';">
+		
+	
+	
+<%-- <%String id1 = (String)session.getAttribute("id1"); %>
+	<h2><%=id1%>님로그인 성공</h2> --%>
 	
 </body>
 </html>
