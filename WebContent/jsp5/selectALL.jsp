@@ -11,7 +11,7 @@
 <title>select</title>
 </head>
 <body>
-	<h1>WebContent/jsp5/select.jsp</h1>
+	
 	<%
 		// 회원의 정보를 출력(개인 1명 정보 조회 )
 		String id = "itwill";
@@ -34,12 +34,13 @@
 		System.out.println("디비 연결 성공!");
 		
 		// 3) sql 쿼리 & pstmt 객체
-		String sql = "select * from itwill_member where id = ? and pass=?";
-//		String sql = "select * from itwill_member";
+//		String sql = "select * from itwill_member where id = ? and pass=?";
+//		String sql = "select * from itwill_member where id != 'admin'";
+		String sql = "select * from itwill_member";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id);
-		pstmt.setString(2, pw);
+//		pstmt.setString(1, id);
+//		pstmt.setString(2, pw);
 		
 		// 4) sql 실행
 		ResultSet rs = pstmt.executeQuery();
@@ -54,30 +55,37 @@
 		// java.sql.ResultSet 타입으로 사용 가능하다.
 		
 		// 5) 데이터 처리
-		if(rs.next()){ //커서를 다음으로 이동시킬때, 데이터가 있으면 true, 데이터가 없으면(EOF) false
+//		if(rs.next()){ //커서를 다음으로 이동시킬때, 데이터가 있으면 true, 데이터가 없으면(EOF) false
 			
-			 out.print("아이디 : "+rs.getString("id")+"<br>");
-			 out.print("비밀번호 : "+rs.getString("pass")+"<br>");
-			 out.print("이메일 : "+rs.getString("email")+"<br>");
+//			 out.print("아이디 : "+rs.getString("id")+"<br>");
+//			 out.print("비밀번호 : "+rs.getString("pass")+"<br>");
+//			 out.print("이메일 : "+rs.getString("email")+"<br>");
 			
 			 // rs.getXXXX("컬럼명"); : select문의 결과 중에서 "컬럼명"에 해당하는 값 가져오기
 			 // XXXX 는 DB데이터의 타입에 따라서 변경
 			 // rs.getXXXX(컬럼인덱스번호) :  ""  인덱스 번호에 해당하는 값 가져오기
 			 // -> 컬럼의 인덱스 번호는 1번부터 시작(왼 -> 오) 훨신 처리속도가 빠름
-			 out.print("아이디 : "+rs.getString(1)+"<br>");
-			 out.print("비밀번호 : "+rs.getString(2)+"<br>");
-			 out.print("이메일 : "+rs.getString(6)+"<br>");
-		}
+//			 out.print("아이디 : "+rs.getString(1)+"<br>");
+//			 out.print("비밀번호 : "+rs.getString(2)+"<br>");
+//			 out.print("이메일 : "+rs.getString(6)+"<br>");
+//		}
 
 		System.out.println("회원정보 조회 성공!! (select)");
 		
 		// select 구문을 사용해서 DB에 있는 모든 회원의 정보를 출력
 		
-			/* while(rs.next()){
-				out.print("아이디 : "+rs.getString(1)+"<br>");
-				out.print("비밀번호 : "+rs.getString(2)+"<br>");
-				out.print("이메일 : "+rs.getString(6)+"<br>");
-			} */
+		// for(배열을 쓴거와 같다)
+			while(rs.next()){
+				if(rs.getString("id").equals("admin")){
+					//System.out.print("관리자 있음");
+					//관리자 출력 X ,그외 사람의 정보를 출력
+					continue;
+				}
+					
+					out.print("아이디 : "+rs.getString(1)+"<br>");
+					out.print("비밀번호 : "+rs.getString(2)+"<br>");
+					out.print("이메일 : "+rs.getString(6)+"<br>");
+			}
 
 	%>
 	
