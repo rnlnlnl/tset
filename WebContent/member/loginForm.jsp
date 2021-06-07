@@ -25,7 +25,7 @@
 	
 	<input type="button" value="회원가입" onclick="location.href='insertForm.jsp';"><br>
 	
-	<button><a href="insertForm.jsp">회원가입</a></button>
+<!--<button><a href="insertForm.jsp">회원가입</a></button>  -->
 	
 	
 </body>

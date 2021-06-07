@@ -60,8 +60,16 @@
 		}else{
 			%>
 			<script type="text/javascript">
-				alert("회원이 아닙니다.");
-				history.back();
+//				alert("회원이 아닙니다.");
+//				location.href="joinQest.jsp";
+				var result = confirm("비회원입니다. 회원가입 하시겠습니까?");
+				
+				if(result){
+					location.href="insertForm.jsp";
+				}else{
+					history.back();
+				}
+				
 			</script>
 			<%
 		}
@@ -75,21 +83,8 @@
 		// + ID가 없을 경우 "비회원 입니다. 회원 가입 하시겠습니까?" Y/N
 		//  Y- 회원가입 페이지로 이동  N- 페이지 뒤로가기
 		
-		
-		
-		
-		
-		
 	%>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 </body>
 </html>
