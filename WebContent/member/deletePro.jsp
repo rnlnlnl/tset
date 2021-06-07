@@ -46,22 +46,28 @@
 				pst.setString(1, id);
 				
 				pst.executeUpdate();
+				
+				session.invalidate();
+				%>
+					<script type="text/javascript">
+						alert("삭제되었습니다");
+						location.href="main.jsp";
+					</script>
+				<%
+				
+			}else{
+				%>
+					<script type="text/javascript">
+					alert("비밀번호가 틀렸습니다.");
+					history.back();
+					</script>
+				<%
 			}
 
 		}
 		
 	%>
-	<script type="text/javascript">
-	alert("삭제되었습니다");
-	location.href="main.jsp";
-	</script>
-	
-	
-	
-	
-	
-	
-	
+
 	
 </body>
 </html>
