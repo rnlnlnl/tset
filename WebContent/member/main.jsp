@@ -28,11 +28,23 @@
 	
 	<hr>
 	
-	<a href="info.jsp">회원정보 조회 (select)</a>
+	<a href="info.jsp">회원정보 조회 (select)</a><br>
 	
-	<a href="updateForm.jsp">회원정보 수정(update)</a>
+	<a href="updateForm.jsp">회원정보 수정(update)</a><br>
 	
-	<a href="deleteForm.jsp">회원 탈퇴(delete)</a>
+	<a href="deleteForm.jsp">회원 탈퇴(delete)</a><br>
 	
+	<!-- admin(관리자) 메뉴 -->
+	<%
+//	  if(id != null){
+//		if(id.equals("admin")){ 
+		// 데이터 값 비교시 null인지 체크후 비교 !!
+		if(id != null && id.equals("admin")){
+	%>
+	<a href="list.jsp">회원 정보 목록(List)</a><br>
+	<%
+		}
+//	  }
+	%>
 </body>
 </html>

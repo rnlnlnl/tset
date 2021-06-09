@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>loginPro</title>
+
 </head>
 <body>
 	<h1>WebContent/member/loginPro.jsp</h1>
