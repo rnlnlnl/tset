@@ -40,6 +40,10 @@
 	<!-- 자바빈 객체에 정보 저장 -->
 	<!-- jb1.setId(request.getParameter("id")); 이거랑 같다 -->
 	<jsp:setProperty property="id" name="jb2" param="id"/>
+	
+	<!-- 자바빈 객체 정보 출력 -->
+	<jsp:getProperty property="id" name="jb2"/>
+	
 	<%
 	
 		System.out.println("액션태그 : "+jb2);

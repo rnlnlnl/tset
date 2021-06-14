@@ -4,20 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>logout</title>
+<title>list</title>
 </head>
 <body>
-	<h1>WebContent/member/logout.jsp</h1>
-	<%
-		// 로그아웃
-		// 세션정보 초기화
-		session.invalidate();
-	%>
-	<script type="text/javascript">
-		alert("로그아웃 완료.");
-		location.href="main.jsp";
-	</script>
-	
-
+	<h1>WebContent/board/list.jsp</h1>
 </body>
 </html>
