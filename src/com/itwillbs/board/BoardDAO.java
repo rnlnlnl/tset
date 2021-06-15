@@ -5,26 +5,86 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class BoardDAO {
 	// DAO (Data Access Object) => itwill_board테이블에 관련된 정보 처리 객체
 	
+	Connection conn = null;
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+	String sql ="";
+	
+	
+	
+	// DB연결 메서드 - 커넥션풀 사용
+	// => 디비 연결정보 (Connection)를 미리 생성 해서 pool에다가 저장
+	// 사용시 연결정보 대여, 사용후 반납처리 (기본 처리로직은 대기 -> 생성후 반납)
+	
+	// 1. 라이브러리 설치 (프로젝트당 한번씩)
+	// 2. context.xml 파일 생성(디비 연결 정보)
+	// 3. 파일을 호출해서 디비 연결 
+	
+	private Connection getCon() throws Exception{
+		// initCTX 초기화라는뜻
+		// 업캐스팅
+		// java:comp/env/ 고정으로 적어줘야 한다
+		// 프로젝트 정보를 초기화
+		Context initCTX = new InitialContext(); 
+		
+		// 다운 캐스팅 lookup이 Object라서 그럼
+		// ds 가 DriverManager을 대신한다
+		// 프로젝트에있는 DB연결정보(이름)를 불러온다
+		DataSource ds 
+			= (DataSource)initCTX.lookup("java:comp/env/jdbc/mysqlDB");
+		
+		// 디비 연결
+		conn = ds.getConnection();
+		System.out.println("DAO : DB연결 성공! "+conn);
+		
+		return conn;
+	}
+	
+	// 자원해제
+	public void closeDB(){
+		try {
+			if(rs != null)rs.close();
+			if(pst != null)pst.close();
+			if(conn != null)conn.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
 	// 글쓰기 메서드() - insertBoard(bb)
 	public void insertBoard(BoardBean bb){
-		final String DRIVER="com.mysql.jdbc.Driver";
-		final String DBURL="jdbc:mysql://localhost:3306/jspdb";
-		final String DBID="root";
-		final String DBPW="1234";
+//		final String DRIVER="com.mysql.jdbc.Driver";
+//		final String DBURL="jdbc:mysql://localhost:3306/jspdb";
+//		final String DBID="root";
+//		final String DBPW="1234";
 		
 		int num =0; // 계산된 글 번호 저장
 		
 		
 		try { // 에러가 발생할지도 모르는 구문을 작성 에러가 발생시 catch로 점프한다
 			// 1. 드라이버 로드
-			Class.forName(DRIVER);
+//			Class.forName(DRIVER);
 			
 			// 2. 디비 연결
-			Connection conn = DriverManager.getConnection(DBURL, DBID, DBPW);
+//			Connection conn = DriverManager.getConnection(DBURL, DBID, DBPW);
+			
+	//		1,2 디비연결(CP)
+			Connection conn = getCon();
+			
 			
 			// 3. sql 작성(insert) & pst 객체 생성
 			// select max(num) from itwill_board;
@@ -80,11 +140,99 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("DAO : DB 연결 실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DAO : DB 연결 실패");
+		}finally{
+			closeDB();
 		}
 		
 	}
 	// 글쓰기 메서드() - insertBoard(bb)
 	
+	// getBoardCount()------------------------------------------------------------------
+	public int getBoardCount(){
+		
+		int cnt= 0; 
+		
+		// 1.2 DB 연결
+		try {
+
+			conn = getCon();
+			
+			// 3. sql 작성 & pst 객체 생성
+			// 글의 총개수 계산
+			sql = "select count(num) from itwill_board";
+			
+			pst = conn.prepareStatement(sql);
+			
+			// 4. sql 실행
+			rs = pst.executeQuery();
+			
+			// 5. 데이터 처리
+			if(rs.next()){
+				cnt = rs.getInt(1);
+				//cnt = rs.getInt("count(num)");
+			}
+			
+			System.out.println("DAO : 글개수 확인"+cnt);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		return cnt;
+	}
+	// getBoardCount()------------------------------------------------------------------
+	
+	// getBoardList()------------------------------------------------------------------
+	// <> java에서는 다이아몬드 오퍼레이터라고 불린다
+	public ArrayList getBoardList(){
+		// ArrayList : 가변 길이 배열(자동으로 배열의 크기를 지정)
+		
+		ArrayList boardList = new ArrayList();
+		
+		// 1.2 DB연결
+		try {
+			conn = getCon();
+		
+			// 3. sql 작성 & pst 객체
+			sql = "select * from itwill_board";
+			pst = conn.prepareStatement(sql);
+			
+			// 4. sql 실행
+			rs = pst.executeQuery();
+			
+			// 5. 데이터 터리
+			while(rs.next()){
+				// 글1개의 정보를 저장
+				BoardBean bb = new BoardBean();
+				bb.setContent(rs.getString("content"));
+				bb.setDate(rs.getDate("date"));
+				bb.setFile(rs.getString("file"));
+				bb.setIp(rs.getString("ip"));
+				bb.setName(rs.getString("name"));
+				bb.setNum(rs.getInt("num"));
+				bb.setPass(rs.getString("pass"));
+				bb.setRe_lev(rs.getInt("re_lev"));
+				bb.setRe_ref(rs.getInt("re_ref"));
+				bb.setRe_seq(rs.getInt("re_seq"));
+				bb.setReadcount(rs.getInt("readcount"));
+				bb.setSubject(rs.getString("subject"));
+				// 글정보를 배열 1칸에 저장
+				boardList.add(bb);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		return boardList;
+	}
+	// getBoardList()------------------------------------------------------------------
 	
 	
 	

@@ -25,6 +25,7 @@
 <%
 	// bb객체에 ip주소 추가
 	bb.setIp(request.getRemoteAddr());
+	
 %>
 	<hr>
 	<%=bb %>
@@ -35,6 +36,8 @@
 	
 	// 글쓰기 메서드 호출
 	bDAO.insertBoard(bb);
+	//bDAO.getCon(); (X) 사용하면 안된다 데이터가 들어나기 때문에 해킹을 당한다
+	
 	
 	// 글쓰기 이후 글 목록 페이지로 이동 (list.jsp);
 	response.sendRedirect("list.jsp");
