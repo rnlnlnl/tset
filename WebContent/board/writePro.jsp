@@ -25,7 +25,6 @@
 <%
 	// bb객체에 ip주소 추가
 	bb.setIp(request.getRemoteAddr());
-	
 %>
 	<hr>
 	<%=bb %>

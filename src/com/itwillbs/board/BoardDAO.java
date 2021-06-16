@@ -224,6 +224,7 @@ public class BoardDAO {
 				boardList.add(bb);
 			}
 			
+			System.out.println("DAO : 글목록 저장완료!!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -233,6 +234,57 @@ public class BoardDAO {
 		return boardList;
 	}
 	// getBoardList()------------------------------------------------------------------
+	
+	// getBoardList(startRow,pageSize)
+	public ArrayList getBoardList(int startRow,int pageSize){
+		
+		ArrayList boardList = new ArrayList();
+		
+		try {
+		// 1.2디비 연결
+		conn = getCon();
+		// 3. sql 작성 & pst 객체
+		// re_ref 내림차순 정렬, re_seq 오름차순
+		// limit 시작행 -1, 갯수 => 원하는 갯수만큼 잘라서 처리
+		sql = "select * from itwill_board order by re_ref desc, re_seq asc limit ?,?";
+		
+		pst =  conn.prepareStatement(sql);
+		pst.setInt(1, startRow-1);
+		pst.setInt(2, pageSize);
+		// 4. sql 실행
+		rs = pst.executeQuery();
+		
+		// 5. 데이터 처리
+		while (rs.next()) {
+			BoardBean bb = new BoardBean();
+			bb.setContent(rs.getString("content"));
+			bb.setDate(rs.getDate("date"));
+			bb.setFile(rs.getString("file"));
+			bb.setIp(rs.getString("ip"));
+			bb.setName(rs.getString("name"));
+			bb.setNum(rs.getInt("num"));
+			bb.setPass(rs.getString("pass"));
+			bb.setRe_lev(rs.getInt("re_lev"));
+			bb.setRe_ref(rs.getInt("re_ref"));
+			bb.setRe_seq(rs.getInt("re_seq"));
+			bb.setReadcount(rs.getInt("readcount"));
+			bb.setSubject(rs.getString("subject"));
+			// 글정보를 배열 1칸에 저장
+			boardList.add(bb);
+			
+			}
+			
+			System.out.println("DAO : 게시판글저장완료 (페이징 처리)");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		return boardList;
+	}
+	// getBoardList(startRow,pageSize)
+	
 	
 	
 	
