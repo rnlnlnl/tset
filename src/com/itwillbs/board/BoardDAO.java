@@ -286,6 +286,118 @@ public class BoardDAO {
 	// getBoardList(startRow,pageSize)
 	
 	
+	//updateReadcount(num)
+	public void updateReadcount(int num){
+		
+		try {
+			// 1,2DB연결
+			conn = getCon();
+			// 3.sql (기존의 조회수 +1) & 객체 생성
+			sql = "update itwill_board set readcount = readcount+1 where num = ? ";
+			// 4. sql 실행
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, num);
+			pst.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+	}
+	//updateReadcount(num)
+	
+	
+	//getBoard(num)
+	public BoardBean getBoard(int num){
+		BoardBean bb = null;
+		try{
+		// 1.2디비 연결
+		conn = getCon();
+		// 3. sql (num에 해당하는 모든 글의 정보 가져오기) & pst 생성
+		sql = "select * from itwill_board where num = ?";
+		// 4. sql 실행
+		pst = conn.prepareStatement(sql);
+		pst.setInt(1, num);
+		
+		rs = pst.executeQuery();
+		// 5. 데이터 처리
+		if(rs.next()){
+			// 데이터 있을때만 객체 생성 (데이터 저장공간 아낌)
+			bb = new BoardBean();
+			
+			bb.setContent(rs.getString("content"));
+			bb.setDate(rs.getDate("date"));
+			bb.setFile(rs.getString("file"));
+			bb.setIp(rs.getString("ip"));
+			bb.setName(rs.getString("name"));
+			bb.setNum(rs.getInt("num"));
+			bb.setPass(rs.getString("pass"));
+			bb.setRe_lev(rs.getInt("re_lev"));
+			bb.setRe_ref(rs.getInt("re_ref"));
+			bb.setRe_seq(rs.getInt("re_seq"));
+			bb.setReadcount(rs.getInt("readcount"));
+			bb.setSubject(rs.getString("subject"));
+			
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bb;
+	}
+	//getBoard(num)
+	
+	
+	//updateBoard(bb)
+	public int updateBoard(BoardBean bb){
+		
+		int check = -1;
+		
+		try{
+		// 1.2 디비연결
+		conn = getCon();
+		// 3. sql 작성(글이 있는지 판단후 글 수정) & pst 객채
+		sql = "select pass from itwill_board where num = ?";
+		// 4. sql 실행
+		pst = conn.prepareStatement(sql);
+		
+		pst.setInt(1, bb.getNum());
+		rs = pst.executeQuery();
+		// 5. 데이터 처리
+		if(rs.next()){// 데이터 있을때
+			if(bb.getPass().equals(rs.getString("pass"))){
+				// 3. sql (데이터 수정) & pst 객체
+				sql = "update itwill_board set name = ?, subject = ?, content = ? where num = ?";
+				
+				// 4. sql 실행
+				pst = conn.prepareStatement(sql);
+				
+				pst.setString(1, bb.getName());
+				pst.setString(2, bb.getSubject());
+				pst.setString(3, bb.getContent());
+				pst.setInt(4, bb.getNum());
+				
+				pst.executeUpdate();
+				
+				check = 1;
+				System.out.println("DAO : 회원정보 수정완료!");
+			}else{
+				//비밀번호 오류(본인 X)
+				check = 0;
+			}
+		}else{
+			// 데이터가 없을때 (글 정보가 X)
+			check = -1;
+		}
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		return check;
+	}
+	//updateBoard(bb)
 	
 	
 }

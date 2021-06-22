@@ -91,7 +91,11 @@
 			<td><%=bb.getName() %></td>
 			<td><%=bb.getPass() %></td>
 			
-			<td><%=bb.getSubject() %></td>
+			<td>
+			
+			<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a>
+			
+			</td>
 			<td><%=bb.getContent() %></td>
 			<td><%=bb.getReadcount() %></td>
 			<td><%=bb.getRe_ref() %></td>
