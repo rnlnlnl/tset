@@ -25,7 +25,7 @@
 	// 페이징 처리
 	
 	// 한 페이지에 출력할 글의 개수
-	int pageSize = 3;
+	int pageSize = 5;
 	// 현재 페이지의 위치정보
 	// list.jsp로올때 pageNum값을 안가지고 와서 pageNum은 null이다
 	// int로 사용하면 인티저로 변환을 계속 해줘야한다
@@ -87,23 +87,30 @@
 			bb = (BoardBean)boardList.get(i);
 %>			
 			<tr>
-			<td><%=bb.getNum() %></td>
-			<td><%=bb.getName() %></td>
-			<td><%=bb.getPass() %></td>
+				<td><%=bb.getNum() %></td>
+				<td><%=bb.getName() %></td>
+				<td><%=bb.getPass() %></td>
+				
+				<td>
+					<% // 들여쓰기 이미지로 넣기
+					int wid = 0;
+					if(bb.getRe_lev() > 0){ // 답글일떄
+						wid = 10 * bb.getRe_lev();
+						%>
+						<img src="level.gif" height="15" width="<%=wid%>">
+						<img src="re.gif">
+					<%} %>
+					<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a>
 			
-			<td>
-			
-			<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a>
-			
-			</td>
-			<td><%=bb.getContent() %></td>
-			<td><%=bb.getReadcount() %></td>
-			<td><%=bb.getRe_ref() %></td>
-			<td><%=bb.getRe_lev() %></td>
-			<td><%=bb.getRe_seq() %></td>
-			<td><%=bb.getDate() %></td>
-			<td><%=bb.getIp() %></td>
-			<td><%=bb.getFile() %></td>
+				</td>
+				<td><%=bb.getContent() %></td>
+				<td><%=bb.getReadcount() %></td>
+				<td><%=bb.getRe_ref() %></td>
+				<td><%=bb.getRe_lev() %></td>
+				<td><%=bb.getRe_seq() %></td>
+				<td><%=bb.getDate() %></td>
+				<td><%=bb.getIp() %></td>
+				<td><%=bb.getFile() %></td>
 			</tr>
 <%			
 		}

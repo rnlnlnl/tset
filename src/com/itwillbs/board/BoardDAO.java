@@ -399,5 +399,116 @@ public class BoardDAO {
 	}
 	//updateBoard(bb)
 	
+	//deleteBoard(num,pass)
+	public int deleteBoard(String pass, int num){
+		int check =0;
+		
+		try {
+			// 1.2 DB연결
+			conn = getCon();
+			// 3. sql작성(select) & pst 객체
+			sql = "select pass from itwill_board where num = ?";
+			
+			pst = conn.prepareStatement(sql);
+			
+			pst.setInt(1, num);
+			// 4. sql 실행
+			rs = pst.executeQuery();
+			// 5. 데이터 처리
+			if(rs.next()){
+				if(pass.equals(rs.getString("pass"))){
+					// 3. sql (delete)
+					sql = "delete from itwill_board where num=?";
+					
+					pst = conn.prepareStatement(sql);
+					
+					pst.setInt(1, num);
+					// 4. sql 실행
+					pst.executeUpdate();
+					
+					System.out.println("DAO: 글 삭제 완료!");
+					check = 1;
+				}else{
+					check = 0;
+				}
+			}else{
+				check = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		return check;
+	}
+	//deleteBoard(num,pass)
+	
+	
+	//reInsertBoard(bb)
+	public void reInsertBoard(BoardBean bb){
+		int num = 0;
+		
+		try {
+			conn = getCon();
+			///////////////////////////////////////////////////////
+			// 글번호 계산
+			sql = "select max(num) from itwill_board";
+			pst = conn.prepareStatement(sql);
+			
+			rs = pst.executeQuery();
+			
+			if(rs.next()){
+				num = rs.getInt(1)+1;
+			}
+			System.out.println("DAO : 답글 번호 계산"+num);
+			///////////////////////////////////////////////////////
+			// 답글 순서 재배치 (update)
+			// re_ref 같은 그룹에 있으면서, 기존의 re_seq 값보다 큰값이 있을때
+			// re_seq값을 1증가
+			
+			sql = "update itwill_board set re_seq = re_seq + 1 "
+					+"where re_ref=? and re_seq>?";
+			pst = conn.prepareStatement(sql);
+			
+			pst.setInt(1, bb.getRe_ref());
+			pst.setInt(2, bb.getRe_seq());
+			
+			pst.executeUpdate();
+			
+			///////////////////////////////////////////////////////
+			// 답글을 저장 (insert)
+			
+			sql = "insert into itwill_board values(?,?,?,?,?,?,?,?,?,now(),?,?)";
+			
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, num);
+			pst.setString(2, bb.getName());
+			pst.setString(3, bb.getPass());
+			pst.setString(4, bb.getSubject());
+			pst.setString(5, bb.getContent());
+			pst.setInt(6, bb.getReadcount());
+			pst.setInt(7, bb.getRe_ref());   // re_ref() : 원글의 그룹번호와 동일
+			pst.setInt(8, bb.getRe_lev()+1); // re_lev() : 원글의 들여쓰기 +1
+			pst.setInt(9, bb.getRe_seq()+1); // re_seq() : 순서대로 기존의 값 +1
+			pst.setString(10, bb.getIp());
+			pst.setString(11, bb.getFile());
+			
+			pst.executeUpdate();
+			
+			System.out.println("DAO : 답글 작성 완료!!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+	}
+	//reInsertBoard(bb)
+	
+	
+	
+	
+	
+	
 	
 }
