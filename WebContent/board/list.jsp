@@ -158,7 +158,6 @@
 				<a href="list.jsp?pageNum=<%=i%>">[<%=i%>]</a>
 			<%
 		}
-		// [다음]
 		if(endPage < pageCount){
 			%>
 			<a  href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a>

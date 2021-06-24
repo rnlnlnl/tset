@@ -269,7 +269,16 @@ re_seq : 답글의 순서, 일반글은 가장위(O)
 
   
   
+* 파일 업로드
+  => MultipartRequest 객체를 생성
   
+  		new MultipartRequest(
+					request,  요청정보 전달
+					realPath, 실제 저장되는 경로
+					maxSize,  업로드파일의 크기
+					"UTF-8",  파일업로드 인코딩
+					new DefaultFileRenamePolicy() 중복된 파일이름을 재정의 하는 객체
+					);
   
   
   
