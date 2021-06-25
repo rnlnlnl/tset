@@ -1,3 +1,4 @@
+<%@page import="java.io.ObjectInputStream.GetField"%>
 <%@page import="com.itwillbs.board.BoardBean"%>
 <%@page import="com.itwillbs.board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -56,6 +57,14 @@
 		<tr>
 			<td>첨부파일</td>
 			<td colspan="3"><%=bb.getFile() %></td>
+		</tr>
+		<tr>
+			<td>첨부 파일</td>
+			<td colspan="3">
+				<a href="../upload/<%=bb.getFile()%>"><%=bb.getFile()%></a>
+				<hr>
+				<a href="filedown.jsp?file_name=<%=bb.getFile()%>"><%=bb.getFile()%></a>
+			</td>
 		</tr>
 		<tr>
 			<td>글 내용</td>
